@@ -29,16 +29,17 @@ public class Libro {
         this.pagAttuale[1] += 2;
     }
     public void diminuisciPag(){
-        this.pagAttuale[0 ]-= 2;
+        this.pagAttuale[0]-= 2;
         this.pagAttuale[1] -= 2;
     }
     public boolean checkEvenPag(int pagina){
         
-        return 0 == pagina % 2;
-    }
+            return 0 == pagina % 2;
+     }
     public void impostaPagEven(int pagina){
-        this.pagAttuale[0] = pagina;
-        this.pagAttuale[1] = pagina++;
+            this.pagAttuale[0] = pagina;
+            this.pagAttuale[1] = pagina++;
+  
     }
     public void impostaPagOdd(int pagina){
         this.pagAttuale[0] = pagina--;
@@ -51,6 +52,6 @@ public class Libro {
         this.prezzo -= sconto;
     }
     public String toString(){
-        return "";
+        return "Pagina attuale" + this.pagAttuale;
     }
 }

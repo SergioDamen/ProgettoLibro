@@ -18,7 +18,13 @@ public class DamenAlexandroLibro {
         Libro l1 = new Libro("Palazzo della memoria",384,30);
         Libro l2 = new Libro("Il barone rampante",312,15.50);
         
-       
+        int pagina = 10;
+        if(l1.checkEvenPag(pagina)){
+            l1.impostaPagEven(pagina);
+        }else{
+            l1.impostaPagEven(pagina);
+        }
+        System.out.println(l1.toString());
     }
     
 }
