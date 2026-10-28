@@ -15,24 +15,15 @@ public class DamenAlexandroLibro {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Libro l1 = new Libro("Palazzo della memoria",384,30);
-        Libro l2 = new Libro("Il barone rampante",312,15.50);
+        Libro l1 = new Libro("Palazzo della memoria",385,30);
+        Libro l2 = new Libro("Il barone rampante",313,15.50);
         
         int pagina = 385;
-        if(l1.checkEvenPag(pagina)){
-            
-            if(l1.canImpostaPagEven(pagina)){
-                l1.impostaPagEven(pagina);
-             }else{
-                System.out.println("ERRORE");
 
-            }
-        }else{
-            if(l1.canImpostaPagOdd(pagina)){
-                l1.impostaPagOdd(pagina);
-            }else{
-                System.out.println("ERRORE");
-            }
+        if (l1.impostaPag(pagina)) {
+        System.out.println(l1.toString());
+        } else {
+            System.out.println("ERRORE: pagina non valida");
         }
         /*System.out.println(l1.toString());
         l1.aumentaPag();
@@ -40,7 +31,7 @@ public class DamenAlexandroLibro {
         l1.diminuisciPag();
         l1.diminuisciPag();
         */
-        System.out.println(l1.toString());
+        
+        //System.out.println(l2.toString());
     }
-    
 }

@@ -14,49 +14,89 @@ public class Libro {
     private int[] pagAttuale;
     private double prezzo;
     private boolean stato;
+    private int pagFisiche;
+
     public Libro(String titolo, int pagNumero, double prezzo){
         this.titolo = titolo;
         this.pagNumero = pagNumero;
-        this.pagAttuale = new int[]{-1,0};
+        this.pagAttuale = new int[]{-1, 0};
         this.prezzo = prezzo;
         this.stato = false;
+
+        if (pagNumero % 2 == 0) {
+            this.pagFisiche = pagNumero + 2;
+        } else {
+            this.pagFisiche = pagNumero + 1;
+        }
     }
     public boolean getStato(){
         return this.stato;
     }
     public void aumentaPag(){
+        if (this.pagAttuale[1] + 2 <= this.pagFisiche) {
         this.pagAttuale[0] += 2;
         this.pagAttuale[1] += 2;
+        }
     }
-    public void diminuisciPag(){
-        this.pagAttuale[0]-= 2;
+    public void diminuisciPag() {
+    if (this.pagAttuale[0] - 2 >= -1) {
+        this.pagAttuale[0] -= 2;
         this.pagAttuale[1] -= 2;
+        }
     }
-    public boolean checkEvenPag(int pagina){
-        
-            return 0 != pagina % 2;
-     }
-    public boolean canImpostaPagEven(int pagina){
-        return (pagNumero++) >= pagina;
+    private boolean checkEvenPag(int pagina) {
+        return pagina % 2 == 0;
     }
-    public boolean canImpostaPagOdd(int pagina){
-        return (pagNumero + 2) >= pagina;
+
+    private boolean canImpostaPagEven(int pagina) {
+        return checkEvenPag(pagina)
+                && pagina >= 2
+                && pagina + 1 <= this.pagFisiche;
     }
-    public void impostaPagEven(int pagina){
+
+    private boolean canImpostaPagOdd(int pagina) {
+        return pagina % 2 != 0 && pagina >= 1 && pagina <= this.pagFisiche;
+    }
+
+    public boolean impostaPag(int pagina) {
+        if (checkEvenPag(pagina)) {
+            if (canImpostaPagEven(pagina)) {
+                impostaPagEven(pagina);
+                return true;
+            }
+        } else {
+            if (canImpostaPagOdd(pagina)) {
+                impostaPagOdd(pagina);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void impostaPagEven(int pagina) {
+        if (canImpostaPagEven(pagina)) {
             this.pagAttuale[0] = pagina;
             this.pagAttuale[1] = pagina + 1;
-  
+        }
     }
-    public void impostaPagOdd(int pagina){
-        this.pagAttuale[0] = pagina - 1;
-        this.pagAttuale[1] = pagina;
+
+    public void impostaPagOdd(int pagina) {
+        if (canImpostaPagOdd(pagina)) {
+            this.pagAttuale[0] = pagina - 1;
+            this.pagAttuale[1] = pagina;
+        }
     }
-    public void cambiaStato(){
-        this.stato = !this.stato;
+    public boolean canSconto(int sconto){
+        return sconto < this.prezzo;
     }
-    public void applicaSconto(int sconto){
-        this.prezzo -= sconto;
+    public boolean applicaSconto(int sconto){
+        if(canSconto(sconto)){
+            this.prezzo -= sconto;
+            return true;
+        }else{
+            return false;
     }
+}
     public String toString(){
         return "Pagina attuale: " + this.pagAttuale[0] +","+ this.pagAttuale[1];
     }
